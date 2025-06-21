@@ -8,6 +8,8 @@ UniVoucher is the world's first decentralized tangible crypto gift card protocol
 
 ## Quick Start
 
+> **Note**: You don't need to install this package manually. Just add the configuration below to your MCP client (Cursor, Claude Desktop, etc.) and it will automatically download and run when needed.
+
 ### For Cursor Users
 
 Add this to your Cursor MCP configuration:
@@ -17,7 +19,7 @@ Add this to your Cursor MCP configuration:
   "mcpServers": {
     "univoucher": {
       "command": "npx",
-      "args": ["univoucher-mcp@latest"],
+      "args": ["-y", "univoucher-mcp@latest"],
       "env": {}
     }
   }
@@ -33,7 +35,7 @@ Add this to your Claude Desktop MCP configuration:
   "mcpServers": {
     "univoucher": {
       "command": "npx",
-      "args": ["univoucher-mcp@latest"],
+      "args": ["-y", "univoucher-mcp@latest"],
       "env": {}
     }
   }

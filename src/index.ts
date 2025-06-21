@@ -13,7 +13,7 @@ import { UniVoucherAPIProvider } from "./providers/api.js";
 import { logger } from "./utils/logger.js";
 
 const SERVER_NAME = "univoucher-mcp";
-const SERVER_VERSION = "1.0.1";
+const SERVER_VERSION = "1.1.0";
 
 class UniVoucherMCPServer {
   private server: Server;
@@ -98,7 +98,8 @@ class UniVoucherMCPServer {
     const transport = new StdioServerTransport();
     await this.server.connect(transport);
     
-    logger.info(`✅ ${SERVER_NAME} MCP server ready!`);
+    logger.info(`✅ ${SERVER_NAME} MCP server ready and listening for requests!`);
+    logger.info(`💡 This server is now waiting for MCP client connections (like Cursor)`);
   }
 }
 

@@ -44,6 +44,6 @@
     "url": "https://github.com/UniVoucher/UniVoucher-MCP/issues"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   }
 }
