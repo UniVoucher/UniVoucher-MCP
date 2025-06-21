@@ -1,0 +1,19 @@
+# Source code (only need dist/)
+src/
+tsconfig.json
+
+# Heavy documentation images (9MB!)
+docs/assets/images/
+
+# Development files
+.git/
+.gitignore
+node_modules/
+
+# Test files
+test-*
+*.test.*
+
+# Development configs
+.vscode/
+.idea/ 

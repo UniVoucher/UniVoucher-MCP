@@ -10,7 +10,6 @@ import {
 } from "@modelcontextprotocol/sdk/types.js";
 import { UniVoucherDocumentationProvider } from "./providers/documentation.js";
 import { UniVoucherAPIProvider } from "./providers/api.js";
-import { logger } from "./utils/logger.js";
 
 const SERVER_NAME = "univoucher-mcp";
 const SERVER_VERSION = "1.1.1";
@@ -89,17 +88,9 @@ class UniVoucherMCPServer {
   }
 
   async start(): Promise<void> {
-    // Show a nice startup message
-    logger.info(`🚀 Starting ${SERVER_NAME} v${SERVER_VERSION}`);
-    logger.info(`📚 Access to UniVoucher documentation and live API data`);
-    logger.info(`🔗 Connected to https://api.univoucher.com`);
-    
     // Start MCP server on stdio
     const transport = new StdioServerTransport();
     await this.server.connect(transport);
-    
-    logger.info(`✅ ${SERVER_NAME} MCP server ready and listening for requests!`);
-    logger.info(`💡 This server is now waiting for MCP client connections (like Cursor)`);
   }
 }
 
@@ -107,6 +98,6 @@ class UniVoucherMCPServer {
 const server = new UniVoucherMCPServer();
 
 server.start().catch((error) => {
-  logger.error("❌ Failed to start MCP server:", error);
+  console.error("Failed to start MCP server:", error);
   process.exit(1);
 }); 
