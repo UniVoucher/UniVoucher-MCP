@@ -75,4 +75,8 @@ test-mcp-client.js
 
 # MCP specific
 mcp-logs/
-*.mcp.log 
+*.mcp.log
+
+# Deployment artifacts
+.vercel
+.netlify 

@@ -1,63 +1,46 @@
 # UniVoucher MCP Server - Deployment Guide
 
-This guide covers deploying the UniVoucher MCP server to Digital Ocean App Platform.
+This guide covers deploying the UniVoucher MCP server to Digital Ocean App Platform as a Node.js application.
 
 ## Prerequisites
 
 - Digital Ocean account
 - GitHub repository with your MCP server code
-- Docker (optional, for local testing)
 
-## Deployment Options
+## Deployment to Digital Ocean App Platform
 
-### Option 1: Digital Ocean App Platform (Recommended)
+The recommended way to deploy is using Digital Ocean's App Platform for Node.js applications:
 
-The easiest way to deploy is using Digital Ocean's App Platform:
+### 1. Push to GitHub
+Make sure your code is in a GitHub repository
 
-1. **Push to GitHub**: Make sure your code is in a GitHub repository
+### 2. Create App on Digital Ocean
+- Go to Digital Ocean App Platform
+- Click "Create App"
+- Select "GitHub" as source
+- Choose your repository and branch
 
-2. **Create App on Digital Ocean**:
-   - Go to Digital Ocean App Platform
-   - Click "Create App"
-   - Select "GitHub" as source
-   - Choose your repository and branch
+### 3. Configure Build Settings
+- **Build Command**: `npm run build`
+- **Run Command**: `npm start`
+- **HTTP Port**: `3000`
+- **Node Version**: `20.x`
 
-3. **Configure Build Settings**:
-   - Build Command: `npm run build`
-   - Run Command: `npm start`
-   - HTTP Port: `3000`
+### 4. Environment Variables
+```
+NODE_ENV=production
+PORT=3000
+```
 
-4. **Environment Variables**:
-   ```
-   NODE_ENV=production
-   PORT=3000
-   ```
+### 5. Deploy
+Click "Create Resources" and wait for deployment to complete
 
-5. **Deploy**: Click "Create Resources"
+## Alternative: Using app.yaml
 
-### Option 2: Using app.yaml
-
-You can also use the included `app.yaml` file:
+You can also use the included `app.yaml` file for deployment:
 
 ```bash
 doctl apps create --spec app.yaml
-```
-
-### Option 3: Docker Container
-
-Build and deploy using Docker:
-
-```bash
-# Build image
-docker build -t univoucher-mcp .
-
-# Run locally
-docker run -p 3000:3000 -e NODE_ENV=production univoucher-mcp
-
-# Deploy to Digital Ocean Container Registry
-doctl registry create univoucher-mcp
-docker tag univoucher-mcp registry.digitalocean.com/univoucher-mcp/server:latest
-docker push registry.digitalocean.com/univoucher-mcp/server:latest
 ```
 
 ## Post-Deployment
@@ -133,10 +116,6 @@ For high-traffic usage:
 2. **Add More Instances**:
    - Increase instance count for load balancing
 
-3. **Add Database** (if needed):
-   - Consider adding Redis for caching
-   - Add PostgreSQL for persistent storage
-
 ## Security Considerations
 
 1. **HTTPS**: Digital Ocean App Platform provides HTTPS by default
@@ -157,6 +136,7 @@ For high-traffic usage:
 1. **Build Fails**:
    - Check Node.js version (requires 18+)
    - Verify all dependencies are listed in package.json
+   - Make sure TypeScript builds successfully
 
 2. **Health Check Fails**:
    - Ensure PORT environment variable is set
