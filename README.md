@@ -52,10 +52,11 @@ Then use `univoucher-mcp` directly in your MCP configuration.
 
 ## Features
 
-### 🔍 Documentation Search
-- Complete UniVoucher user guides and technical documentation
-- Developer integration guides and API reference
-- Security best practices and implementation examples
+### 📚 Documentation Access
+- Complete UniVoucher documentation pages delivered in full
+- Browse and discover all available documentation
+- Get multiple related pages at once for comprehensive information
+- No more search guessing - get the exact page you need
 
 ### 📊 Live API Access
 - Query gift cards with advanced filtering
@@ -67,7 +68,9 @@ Then use `univoucher-mcp` directly in your MCP configuration.
 
 | Tool | Description |
 |------|-------------|
-| `search_docs` | Search UniVoucher documentation |
+| `list_doc_pages` | List all available documentation pages with descriptions |
+| `get_doc_page` | Get complete content of a specific documentation page |
+| `get_multiple_doc_pages` | Get complete content of multiple documentation pages at once |
 | `query_api_cards` | Query gift cards from the protocol |
 | `get_single_card` | Get details of a specific card |
 | `get_current_fees` | Get current protocol fees |
@@ -78,11 +81,13 @@ Then use `univoucher-mcp` directly in your MCP configuration.
 
 Once configured, you can ask your AI assistant:
 
-- "How many cards are in the UniVoucher protocol?"
+- "Show me the complete UniVoucher integration guide for developers"
+- "Get me the full documentation on creating gift cards"
 - "What are the current fees on Ethereum?"
-- "Show me how to create a gift card using UniVoucher"
-- "Which blockchains does UniVoucher support?"
-- "What security measures should I implement when integrating UniVoucher?"
+- "List all available UniVoucher documentation pages"
+- "Show me the technical documentation on how UniVoucher works"
+- "Get the API reference and security documentation"
+- "How many cards are in the UniVoucher protocol?"
 
 ## Support
 

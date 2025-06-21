@@ -181,102 +181,207 @@ export class UniVoucherDocumentationProvider {
   async listTools(): Promise<Tool[]> {
     return [
       {
-        name: "search_docs",
-        description: "Search UniVoucher documentation for specific topics",
+        name: "list_doc_pages",
+        description: "List all available UniVoucher documentation pages with their descriptions to help find the right content",
         inputSchema: {
           type: "object",
           properties: {
-            query: {
+            category: {
               type: "string",
-              description: "Search query for documentation",
-            },
-            section: {
-              type: "string",
-              description: "Specific documentation section to search in (optional)",
-              enum: ["index", "faq", "fees", "user-guide", "technical", "developers", "privacy-policy", "license", "disclaimer"],
+              description: "Filter by documentation category (optional)",
+              enum: ["user-guide", "technical", "developers", "general", "legal"],
             },
           },
-          required: ["query"],
+          required: [],
+        },
+      },
+      {
+        name: "get_doc_page",
+        description: "Get the complete content of a specific UniVoucher documentation page. Much more effective than searching - returns the entire page content.",
+        inputSchema: {
+          type: "object",
+          properties: {
+            page: {
+              type: "string",
+              description: "The documentation page to retrieve. Use exact page identifiers from list_doc_pages.",
+              enum: [
+                "index",
+                "faq", 
+                "fees",
+                "disclaimer",
+                "privacy-policy",
+                "license",
+                "user-guide/quick-start",
+                "user-guide/wallet-connection", 
+                "user-guide/creating-gift-cards",
+                "user-guide/bulk-creation",
+                "user-guide/viewing-gift-cards",
+                "user-guide/redeeming-gift-cards",
+                "user-guide/managing-your-cards",
+                "technical/how-it-works",
+                "technical/smart-contract",
+                "technical/supported-networks", 
+                "technical/card-security",
+                "technical/card-id-format",
+                "developers/integration-guide",
+                "developers/security",
+                "developers/api-reference"
+              ],
+            },
+          },
+          required: ["page"],
+        },
+      },
+      {
+        name: "get_multiple_doc_pages",
+        description: "Get the complete content of multiple UniVoucher documentation pages at once. Useful when you need comprehensive information across multiple related topics.",
+        inputSchema: {
+          type: "object",
+          properties: {
+            pages: {
+              type: "array",
+              items: {
+                type: "string",
+                enum: [
+                  "index",
+                  "faq", 
+                  "fees",
+                  "disclaimer",
+                  "privacy-policy",
+                  "license",
+                  "user-guide/quick-start",
+                  "user-guide/wallet-connection", 
+                  "user-guide/creating-gift-cards",
+                  "user-guide/bulk-creation",
+                  "user-guide/viewing-gift-cards",
+                  "user-guide/redeeming-gift-cards",
+                  "user-guide/managing-your-cards",
+                  "technical/how-it-works",
+                  "technical/smart-contract",
+                  "technical/supported-networks", 
+                  "technical/card-security",
+                  "technical/card-id-format",
+                  "developers/integration-guide",
+                  "developers/security",
+                  "developers/api-reference"
+                ],
+              },
+              description: "Array of documentation pages to retrieve",
+              minItems: 1,
+              maxItems: 10,
+            },
+          },
+          required: ["pages"],
         },
       },
     ];
   }
 
   async callTool(name: string, args: any): Promise<{ content: { type: string; text: string }[] }> {
-    if (name === "search_docs") {
-      return await this.searchDocs(args.query, args.section);
+    if (name === "list_doc_pages") {
+      return await this.listDocPages(args.category);
+    } else if (name === "get_doc_page") {
+      return await this.getDocPage(args.page);
+    } else if (name === "get_multiple_doc_pages") {
+      return await this.getMultipleDocPages(args.pages);
     }
     
     throw new Error(`Unknown tool: ${name}`);
   }
 
-  private async searchDocs(query: string, section?: string): Promise<{ content: { type: string; text: string }[] }> {
-    const results: string[] = [];
+  private async listDocPages(category?: string): Promise<{ content: { type: string; text: string }[] }> {
+    const resources = await this.listResources();
     
-    if (section) {
-      // Search in specific section
-      await this.searchInSection(query, section, results);
-    } else {
-      // Search in all sections
-      const allSections = ["index", "faq", "fees", "user-guide", "technical", "developers", "privacy-policy", "license", "disclaimer"];
-      for (const sec of allSections) {
-        await this.searchInSection(query, sec, results);
-      }
+    let filteredResources = resources;
+    if (category) {
+      filteredResources = resources.filter(resource => {
+        const path = resource.uri.replace("univoucher://docs/", "");
+        switch (category) {
+          case "user-guide":
+            return path.startsWith("user-guide/");
+          case "technical": 
+            return path.startsWith("technical/");
+          case "developers":
+            return path.startsWith("developers/");
+          case "legal":
+            return ["privacy-policy", "license", "disclaimer"].includes(path);
+          case "general":
+            return !path.includes("/");
+          default:
+            return true;
+        }
+      });
     }
-    
-    const resultText = results.length > 0 
-      ? results.join("\n\n") 
-      : `No results found for "${query}"`;
-    
+
+    const pageList = filteredResources.map(resource => {
+      const page = resource.uri.replace("univoucher://docs/", "");
+      return `**${page}** - ${resource.name}\n  ${resource.description}`;
+    }).join("\n\n");
+
     return {
       content: [
         {
           type: "text",
-          text: resultText,
+          text: `# Available UniVoucher Documentation Pages\n\n${pageList}\n\n**Usage:** Use the page identifier (in bold) with the \`get_doc_page\` tool to retrieve the full content of any page.`,
         },
       ],
     };
   }
 
-  private async searchInSection(query: string, section: string, results: string[]): Promise<void> {
+  private async getDocPage(page: string): Promise<{ content: { type: string; text: string }[] }> {
     try {
-      if (["user-guide", "technical", "developers"].includes(section)) {
-        // Search in subdirectories
-        const sectionDir = join(this.docsPath, section);
-        const { readdir } = await import("fs/promises");
-        const files = await readdir(sectionDir);
-        
-        for (const file of files) {
-          if (file.endsWith(".md") && !file.startsWith(".")) {
-            const filePath = join(sectionDir, file);
-            const content = await readFile(filePath, "utf-8");
-            const matchingLines = this.findMatchingLines(content, query);
-            
-            if (matchingLines.length > 0) {
-              const fileName = file.replace(".md", "");
-              results.push(`## ${section.toUpperCase()}/${fileName.replace("-", " ").toUpperCase()}\n${matchingLines.join("\n")}`);
-            }
-          }
-        }
+      let filePath: string;
+      
+      if (page.includes("/")) {
+        // Handle subdirectory paths like "user-guide/quick-start"
+        filePath = join(this.docsPath, `${page}.md`);
       } else {
-        // Search in root level files
-        const filePath = join(this.docsPath, `${section}.md`);
-        const content = await readFile(filePath, "utf-8");
-        const matchingLines = this.findMatchingLines(content, query);
-        
-        if (matchingLines.length > 0) {
-          results.push(`## ${section.replace("-", " ").toUpperCase()}\n${matchingLines.join("\n")}`);
-        }
+        // Handle root level files like "index", "faq", "fees"
+        filePath = join(this.docsPath, `${page}.md`);
       }
+      
+      const content = await readFile(filePath, "utf-8");
+      
+      return {
+        content: [
+          {
+            type: "text",
+            text: `# Documentation: ${page}\n\n${content}`,
+          },
+        ],
+      };
     } catch (error) {
-      // Skip missing files or directories
+      throw new Error(`Documentation page not found: ${page}. Use list_doc_pages to see available pages.`);
     }
   }
 
-  private findMatchingLines(content: string, query: string): string[] {
-    const lines = content.split("\n");
-    return lines.filter((line: string) => 
-      line.toLowerCase().includes(query.toLowerCase())
-    );
+  private async getMultipleDocPages(pages: string[]): Promise<{ content: { type: string; text: string }[] }> {
+    const results: string[] = [];
+    
+    for (const page of pages) {
+      try {
+        let filePath: string;
+        
+        if (page.includes("/")) {
+          filePath = join(this.docsPath, `${page}.md`);
+        } else {
+          filePath = join(this.docsPath, `${page}.md`);
+        }
+        
+        const content = await readFile(filePath, "utf-8");
+        results.push(`# Documentation: ${page}\n\n${content}\n\n---\n`);
+      } catch (error) {
+        results.push(`# Documentation: ${page}\n\n**Error:** Page not found\n\n---\n`);
+      }
+    }
+    
+    return {
+      content: [
+        {
+          type: "text",
+          text: results.join("\n"),
+        },
+      ],
+    };
   }
 } 
