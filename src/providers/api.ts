@@ -71,17 +71,19 @@ export class UniVoucherAPIProvider {
       },
       {
         name: "get_single_card",
-        description: "Get details of a single card by ID or slot ID",
+        description: "Get details of a single card by ID (integer) or slot ID (string). Provide either id OR slotId, not both.",
         inputSchema: {
           type: "object",
           properties: {
-            id: { type: "integer", description: "Card ID" },
-            slotId: { type: "string", description: "Card slot ID" },
+            id: { 
+              type: "integer", 
+              description: "Card ID (use this OR slotId, not both)" 
+            },
+            slotId: { 
+              type: "string", 
+              description: "Card slot ID (use this OR id, not both)" 
+            },
           },
-          oneOf: [
-            { required: ["id"] },
-            { required: ["slotId"] },
-          ],
         },
       },
       {
@@ -103,7 +105,7 @@ export class UniVoucherAPIProvider {
         inputSchema: {
           type: "object",
           properties: {
-            chainId: { type: "integer", description: "Chain ID", required: true },
+            chainId: { type: "integer", description: "Chain ID" },
           },
           required: ["chainId"],
         },
