@@ -4,96 +4,11 @@ A Model Context Protocol (MCP) server that provides access to UniVoucher documen
 
 ## What is UniVoucher?
 
-UniVoucher is the world's first decentralized tangible crypto gift card protocol that allows users to create and redeem crypto gift cards across multiple blockchains. This MCP server provides developers with easy access to:
+UniVoucher is the world's first decentralized tangible crypto gift card protocol that allows users to create and redeem crypto gift cards across multiple blockchains.
 
-- **Complete Documentation**: User guides, technical references, and integration guides
-- **Live API Access**: Query cards, fees, chains, and other protocol data
-- **Developer Resources**: Everything needed to integrate UniVoucher into your application
+## Quick Start
 
-## Features
-
-### Documentation Resources
-- User guides for creating and redeeming gift cards
-- Technical documentation about the protocol
-- Developer integration guides
-- API reference documentation
-- Security best practices
-
-### API Tools
-- Query gift cards with advanced filtering
-- Get single card details by ID or slot ID
-- Check current fees across all chains
-- Get fee history for specific chains
-- List supported blockchain networks
-- Real-time protocol data
-
-### Search Capabilities
-- Full-text search across all documentation
-- Section-specific search
-- Developer-focused content discovery
-
-## Installation
-
-### Prerequisites
-- Node.js 18.0.0 or higher
-- npm or yarn
-
-### Install Dependencies
-```bash
-npm install
-```
-
-### Build the Server
-```bash
-npm run build
-```
-
-### Start the Server
-```bash
-npm start
-```
-
-For development:
-```bash
-npm run dev
-```
-
-## Usage
-
-This MCP server provides two main types of resources:
-
-### 1. Documentation Resources
-Access comprehensive UniVoucher documentation:
-- `univoucher://docs/index` - Main documentation index
-- `univoucher://docs/user-guide/*` - User guides
-- `univoucher://docs/technical/*` - Technical documentation
-- `univoucher://docs/developers/*` - Developer resources
-
-### 2. API Resources
-- `univoucher://api/openapi-spec` - Complete OpenAPI specification
-- `univoucher://api/endpoints` - List of available endpoints
-
-## Available Tools
-
-### Documentation Tools
-- `search_docs` - Search across all documentation with optional section filtering
-
-### API Tools
-- `query_api_cards` - Query UniVoucher cards with various filters
-- `get_single_card` - Get details of a specific card
-- `get_current_fees` - Get current protocol fees
-- `get_fee_history` - Get fee update history for chains
-- `get_chains` - Get supported blockchain networks
-
-## Live Server
-
-🚀 **The UniVoucher MCP Server is live and ready to use!**
-
-**Server URL**: [https://univoucher-mcp-a3gaa.ondigitalocean.app](https://univoucher-mcp-a3gaa.ondigitalocean.app)
-
-**Health Check**: [https://univoucher-mcp-a3gaa.ondigitalocean.app/health](https://univoucher-mcp-a3gaa.ondigitalocean.app/health)
-
-## Quick Start for Cursor Users
+### For Cursor Users
 
 Add this to your Cursor MCP configuration:
 
@@ -109,99 +24,74 @@ Add this to your Cursor MCP configuration:
 }
 ```
 
-See [CURSOR_SETUP.md](./CURSOR_SETUP.md) for detailed setup instructions.
+### For Claude Desktop Users
 
-## Configuration
+Add this to your Claude Desktop MCP configuration:
 
-The server connects to the UniVoucher API at `https://api.univoucher.com/v1` by default. The API is completely free and public - no API key required!
-
-## Examples
-
-### Search Documentation
 ```json
 {
-  "tool": "search_docs",
-  "arguments": {
-    "query": "creating gift cards",
-    "section": "user-guide"
+  "mcpServers": {
+    "univoucher": {
+      "command": "npx",
+      "args": ["univoucher-mcp@latest"],
+      "env": {}
+    }
   }
 }
 ```
 
-### Query Cards
-```json
-{
-  "tool": "query_api_cards",
-  "arguments": {
-    "status": "active",
-    "chain": 1,
-    "limit": 10
-  }
-}
+### Manual Installation (Optional)
+
+```bash
+npm install -g univoucher-mcp
 ```
 
-### Get Chain Information
-```json
-{
-  "tool": "get_chains",
-  "arguments": {
-    "chain": 56
-  }
-}
-```
+Then use `univoucher-mcp` directly in your MCP configuration.
 
-## Integration Guide
+## Features
 
-This MCP server is perfect for:
+### 🔍 Documentation Search
+- Complete UniVoucher user guides and technical documentation
+- Developer integration guides and API reference
+- Security best practices and implementation examples
 
-1. **IDE Integration**: Add UniVoucher context to your development environment
-2. **AI Applications**: Provide AI assistants with UniVoucher knowledge
-3. **Developer Tools**: Build custom tools with UniVoucher data
-4. **Documentation Bots**: Create support bots with comprehensive UniVoucher knowledge
+### 📊 Live API Access
+- Query gift cards with advanced filtering
+- Get current fees across all supported chains
+- Check supported blockchain networks
+- Retrieve real-time protocol statistics
 
-## Supported IDE/AI Applications
+### 🛠️ Available Tools
 
-- Cursor
-- VS Code (with MCP extension)
-- Claude Desktop
-- Any MCP-compatible application
+| Tool | Description |
+|------|-------------|
+| `search_docs` | Search UniVoucher documentation |
+| `query_api_cards` | Query gift cards from the protocol |
+| `get_single_card` | Get details of a specific card |
+| `get_current_fees` | Get current protocol fees |
+| `get_chains` | Get supported blockchain networks |
+| `get_fee_history` | Get historical fee data |
 
-## API Reference
+## Example Usage
 
-The server exposes the complete UniVoucher API through MCP tools. The API provides:
+Once configured, you can ask your AI assistant:
 
-- **Cards**: Query, filter, and retrieve gift card data
-- **Fees**: Current and historical fee information
-- **Chains**: Supported blockchain networks
-- **Health**: API status and connectivity
+- "How many cards are in the UniVoucher protocol?"
+- "What are the current fees on Ethereum?"
+- "Show me how to create a gift card using UniVoucher"
+- "Which blockchains does UniVoucher support?"
+- "What security measures should I implement when integrating UniVoucher?"
 
-All API responses are returned as formatted JSON for easy consumption.
+## Support
 
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## Links
-
-- [UniVoucher Website](https://univoucher.com)
-- [UniVoucher Documentation](https://docs.univoucher.com)
-- [UniVoucher API](https://api.univoucher.com)
-- [Telegram Support](https://t.me/univoucher)
+- **GitHub**: [UniVoucher MCP Issues](https://github.com/UniVoucher/UniVoucher-MCP/issues)
+- **Telegram**: [UniVoucher Community](https://t.me/univoucher)
+- **Documentation**: [docs.univoucher.com](https://docs.univoucher.com)
+- **API**: [api.univoucher.com](https://api.univoucher.com)
 
 ## License
 
 MIT License - see LICENSE file for details
-
-## Support
-
-For support with this MCP server:
-- Open an issue on GitHub
-- Join our [Telegram Group](https://t.me/univoucher)
-- Check the [documentation](https://docs.univoucher.com)
 
 ---
 

@@ -11,11 +11,9 @@ import {
 import { UniVoucherDocumentationProvider } from "./providers/documentation.js";
 import { UniVoucherAPIProvider } from "./providers/api.js";
 import { logger } from "./utils/logger.js";
-import { createServer } from "http";
 
 const SERVER_NAME = "univoucher-mcp";
-const SERVER_VERSION = "1.0.0";
-const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
+const SERVER_VERSION = "1.0.1";
 
 class UniVoucherMCPServer {
   private server: Server;
@@ -91,62 +89,23 @@ class UniVoucherMCPServer {
   }
 
   async start(): Promise<void> {
+    // Show a nice startup message
+    logger.info(`🚀 Starting ${SERVER_NAME} v${SERVER_VERSION}`);
+    logger.info(`📚 Access to UniVoucher documentation and live API data`);
+    logger.info(`🔗 Connected to https://api.univoucher.com`);
+    
     // Start MCP server on stdio
     const transport = new StdioServerTransport();
     await this.server.connect(transport);
-    logger.info(`${SERVER_NAME} v${SERVER_VERSION} MCP server started`);
-  }
-
-  async startHttpServer(): Promise<void> {
-    // Create HTTP server for health checks and deployment
-    const httpServer = createServer((req, res) => {
-      if (req.url === '/health') {
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ 
-          status: 'ok', 
-          name: SERVER_NAME,
-          version: SERVER_VERSION,
-          message: 'UniVoucher MCP Server is running'
-        }));
-      } else if (req.url === '/') {
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({
-          name: SERVER_NAME,
-          version: SERVER_VERSION,
-          description: 'UniVoucher MCP Server - Model Context Protocol server for UniVoucher documentation and API',
-          endpoints: {
-            '/health': 'Health check endpoint',
-            '/': 'Server information'
-          },
-          usage: 'This is an MCP server. Install via: npm install -g univoucher-mcp',
-          documentation: 'https://docs.univoucher.com',
-          api: 'https://api.univoucher.com'
-        }));
-      } else {
-        res.writeHead(404, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ error: 'Not found' }));
-      }
-    });
-
-    httpServer.listen(PORT, () => {
-      logger.info(`${SERVER_NAME} HTTP server listening on port ${PORT}`);
-    });
+    
+    logger.info(`✅ ${SERVER_NAME} MCP server ready!`);
   }
 }
 
-// Determine how to start based on environment
+// Start the MCP server
 const server = new UniVoucherMCPServer();
 
-if (process.env.NODE_ENV === 'production' || process.env.HTTP_MODE === 'true') {
-  // Start HTTP server for deployment
-  server.startHttpServer().catch((error) => {
-    logger.error("Failed to start HTTP server:", error);
-    process.exit(1);
-  });
-} else {
-  // Start MCP server on stdio for local development
-  server.start().catch((error) => {
-    logger.error("Failed to start MCP server:", error);
-    process.exit(1);
-  });
-} 
+server.start().catch((error) => {
+  logger.error("❌ Failed to start MCP server:", error);
+  process.exit(1);
+}); 
