@@ -1,1 +1,9 @@
- 
+{
+  "mcpServers": {
+    "univoucher": {
+      "command": "npx",
+      "args": ["univoucher-mcp@latest"],
+      "env": {}
+    }
+  }
+} 

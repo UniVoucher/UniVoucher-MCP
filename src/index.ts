@@ -118,7 +118,7 @@ class UniVoucherMCPServer {
             '/health': 'Health check endpoint',
             '/': 'Server information'
           },
-          usage: 'This is an MCP server. Connect using MCP client tools.',
+          usage: 'This is an MCP server. Install via: npm install -g univoucher-mcp',
           documentation: 'https://docs.univoucher.com',
           api: 'https://api.univoucher.com'
         }));

@@ -1,11 +1,9 @@
 {
   "mcpServers": {
     "univoucher": {
-      "command": "node",
-      "args": ["/Users/ashraf/univoucher-mcp/dist/index.js"],
-      "env": {
-        "NODE_ENV": "development"
-      }
+      "command": "npx",
+      "args": ["univoucher-mcp@latest"],
+      "env": {}
     }
   }
 } 

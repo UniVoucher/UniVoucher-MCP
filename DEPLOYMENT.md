@@ -15,10 +15,10 @@ The recommended way to deploy is using Digital Ocean's App Platform for Node.js 
 Make sure your code is in a GitHub repository
 
 ### 2. Create App on Digital Ocean
-- Go to Digital Ocean App Platform
-- Click "Create App"
-- Select "GitHub" as source
-- Choose your repository and branch
+   - Go to Digital Ocean App Platform
+   - Click "Create App"
+   - Select "GitHub" as source
+   - Choose your repository and branch
 
 ### 3. Configure Build Settings
 - **Build Command**: `npm run build`
@@ -27,10 +27,10 @@ Make sure your code is in a GitHub repository
 - **Node Version**: `20.x`
 
 ### 4. Environment Variables
-```
-NODE_ENV=production
-PORT=3000
-```
+   ```
+   NODE_ENV=production
+   PORT=3000
+   ```
 
 ### 5. Deploy
 Click "Create Resources" and wait for deployment to complete

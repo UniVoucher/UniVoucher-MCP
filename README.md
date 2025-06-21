@@ -85,6 +85,32 @@ Access comprehensive UniVoucher documentation:
 - `get_fee_history` - Get fee update history for chains
 - `get_chains` - Get supported blockchain networks
 
+## Live Server
+
+🚀 **The UniVoucher MCP Server is live and ready to use!**
+
+**Server URL**: [https://univoucher-mcp-a3gaa.ondigitalocean.app](https://univoucher-mcp-a3gaa.ondigitalocean.app)
+
+**Health Check**: [https://univoucher-mcp-a3gaa.ondigitalocean.app/health](https://univoucher-mcp-a3gaa.ondigitalocean.app/health)
+
+## Quick Start for Cursor Users
+
+Add this to your Cursor MCP configuration:
+
+```json
+{
+  "mcpServers": {
+    "univoucher": {
+      "command": "npx",
+      "args": ["univoucher-mcp@latest"],
+      "env": {}
+    }
+  }
+}
+```
+
+See [CURSOR_SETUP.md](./CURSOR_SETUP.md) for detailed setup instructions.
+
 ## Configuration
 
 The server connects to the UniVoucher API at `https://api.univoucher.com/v1` by default. The API is completely free and public - no API key required!
