@@ -1,0 +1,22 @@
+name: univoucher-mcp
+services:
+  - name: univoucher-mcp-server
+    source_dir: /
+    github:
+      repo: univoucher/univoucher-mcp
+      branch: main
+    run_command: npm start
+    environment_slug: node-js
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    http_port: 3000
+    health_check:
+      http_path: /health
+    envs:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "3000"
+    routes:
+      - path: /
+    build_command: npm run build 
