@@ -2,9 +2,6 @@
 src/
 tsconfig.json
 
-# Heavy documentation images (9MB!)
-docs/assets/images/
-
 # Development files
 .git/
 .gitignore
