@@ -12,7 +12,7 @@ import { UniVoucherDocumentationProvider } from "./providers/documentation.js";
 import { UniVoucherAPIProvider } from "./providers/api.js";
 
 const SERVER_NAME = "univoucher-mcp";
-const SERVER_VERSION = "1.3.1";
+const SERVER_VERSION = "1.3.2";
 
 class UniVoucherMCPServer {
   private server: Server;
