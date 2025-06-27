@@ -146,6 +146,12 @@ export class UniVoucherDocumentationProvider {
         description: "UniVoucher legal disclaimer",
         mimeType: "text/markdown",
       },
+      {
+        uri: "univoucher://docs/partner-program",
+        name: "Partner Program",
+        description: "UniVoucher Partner Program - earn 1% fees on redemptions",
+        mimeType: "text/markdown",
+      },
     ];
   }
 
@@ -225,7 +231,8 @@ export class UniVoucherDocumentationProvider {
                 "technical/card-id-format",
                 "developers/integration-guide",
                 "developers/security",
-                "developers/api-reference"
+                "developers/api-reference",
+                "partner-program"
               ],
             },
           },
@@ -263,7 +270,8 @@ export class UniVoucherDocumentationProvider {
                   "technical/card-id-format",
                   "developers/integration-guide",
                   "developers/security",
-                  "developers/api-reference"
+                  "developers/api-reference",
+                  "partner-program"
                 ],
               },
               description: "Array of documentation pages to retrieve",
@@ -306,7 +314,7 @@ export class UniVoucherDocumentationProvider {
           case "legal":
             return ["privacy-policy", "license", "disclaimer"].includes(path);
           case "general":
-            return !path.includes("/");
+            return !path.includes("/") && !["privacy-policy", "license", "disclaimer"].includes(path);
           default:
             return true;
         }
