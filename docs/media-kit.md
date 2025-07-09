@@ -19,14 +19,17 @@ The complete UniVoucher logo including both the symbol and wordmark.
 
 #### PNG Version
 
-![UniVoucher Full Logo](assets/images/univoucherlogo-ft0.png){ class="logo-preview" }
+![UniVoucher Full Logo](https://docs.univoucher.com/assets/images/univoucherlogo-ft0.png){ class="logo-preview" }
 
 **Full Logo PNG**
 - Background: Transparent
 - High resolution
 - Ready for print and digital use
 
-[Download PNG](assets/images/univoucherlogo-ft0.png){ .md-button .md-button--primary } [Download PSD](assets/images/univoucherlogo-ft0.psd){ .md-button .md-button--primary } [Download SVG](assets/images//univoucherlogo-ft0.svg){ .md-button .md-button--primary }
+**Download Links:**
+- PNG: https://docs.univoucher.com/assets/images/univoucherlogo-ft0.png
+- PSD: https://docs.univoucher.com/assets/images/univoucherlogo-ft0.psd  
+- SVG: https://docs.univoucher.com/assets/images/univoucherlogo-ft0.svg
 
 ---
 
@@ -36,14 +39,17 @@ The UniVoucher symbol without the wordmark, perfect for favicons, app icons, and
 
 #### PNG Version
 
-![UniVoucher Symbol](assets/images/univoucherlogo-st0.png){ class="symbol-preview" }
+![UniVoucher Symbol](https://docs.univoucher.com/assets/images/univoucherlogo-st0.png){ class="symbol-preview" }
 
 **Symbol PNG**
 - Size: 512×512px
 - Background: Transparent
 - Perfect for favicons and app icons
 
-[Download PNG](assets/images/univoucherlogo-st0.png){ .md-button .md-button--primary } [Download PSD](assets/images/univoucherlogo-st0.psd){ .md-button .md-button--primary } [Download SVG](assets/images/univoucherlogo-st0.svg){ .md-button .md-button--primary }
+**Download Links:**
+- PNG: https://docs.univoucher.com/assets/images/univoucherlogo-st0.png
+- PSD: https://docs.univoucher.com/assets/images/univoucherlogo-st0.psd
+- SVG: https://docs.univoucher.com/assets/images/univoucherlogo-st0.svg
 
 ---
 
