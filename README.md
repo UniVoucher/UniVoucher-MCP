@@ -1,34 +1,18 @@
 # UniVoucher MCP Server
 
-A Model Context Protocol (MCP) server that provides access to UniVoucher documentation and API for developers building integrations with the world's first decentralized crypto gift card protocol.
+**Official Model Context Protocol (MCP) server for [UniVoucher.com](https://univoucher.com)** - the world's first decentralized crypto gift card protocol that allows users to create and redeem crypto gift cards across multiple blockchains.
 
 ## What is UniVoucher?
 
-UniVoucher is the world's first decentralized tangible crypto gift card protocol that allows users to create and redeem crypto gift cards across multiple blockchains.
+UniVoucher is the world's first decentralized tangible crypto gift card protocol that allows users to create and redeem crypto gift cards across multiple blockchains including Ethereum, Polygon, BSC, and more.
 
-## Quick Start
+## 🚀 Quick Installation
 
-> **Note**: You don't need to install this package manually. Just add the configuration below to your MCP client (Cursor, Claude Desktop, etc.) and it will automatically download and run when needed.
+> **Note**: No manual installation needed! Just add the configuration below to your MCP client and it will automatically download and run when needed.
 
-### For Cursor Users
+### MCP Configuration
 
-Add this to your Cursor MCP configuration:
-
-```json
-{
-  "mcpServers": {
-    "univoucher": {
-      "command": "npx",
-      "args": ["-y", "univoucher-mcp@latest"],
-      "env": {}
-    }
-  }
-}
-```
-
-### For Claude Desktop Users
-
-Add this to your Claude Desktop MCP configuration:
+Add this to your MCP configuration file (`mcp.json` or equivalent):
 
 ```json
 {
@@ -42,10 +26,22 @@ Add this to your Claude Desktop MCP configuration:
 }
 ```
 
-### Manual Installation (Optional)
+### Supported MCP Clients
 
+- **Cursor**: Add to your Cursor MCP settings
+- **Claude Desktop**: Add to your Claude Desktop configuration
+- **Any MCP-compatible client**: Use the configuration above
+
+### Alternative Installation Methods
+
+#### Global Installation
 ```bash
-npm install -g univoucher-mcp
+npm install -g univoucher-mcp@latest
+```
+
+#### Specific Version Installation
+```bash
+npm install univoucher-mcp@1.3.3
 ```
 
 Then use `univoucher-mcp` directly in your MCP configuration.
@@ -89,12 +85,19 @@ Once configured, you can ask your AI assistant:
 - "Get the API reference and security documentation"
 - "How many cards are in the UniVoucher protocol?"
 
-## Support
+## Links
 
-- **GitHub**: [UniVoucher MCP Issues](https://github.com/UniVoucher/UniVoucher-MCP/issues)
-- **Telegram**: [UniVoucher Community](https://t.me/univoucher)
+- **Official Website**: [univoucher.com](https://univoucher.com)
 - **Documentation**: [docs.univoucher.com](https://docs.univoucher.com)
 - **API**: [api.univoucher.com](https://api.univoucher.com)
+- **GitHub**: [UniVoucher MCP Repository](https://github.com/UniVoucher/UniVoucher-MCP)
+- **NPM Package**: [univoucher-mcp](https://www.npmjs.com/package/univoucher-mcp)
+
+## Support
+
+- **GitHub Issues**: [Report bugs or request features](https://github.com/UniVoucher/UniVoucher-MCP/issues)
+- **Telegram**: [UniVoucher Community](https://t.me/univoucher)
+- **Email**: support@univoucher.com
 
 ## License
 
@@ -102,4 +105,4 @@ MIT License - see LICENSE file for details
 
 ---
 
-Built with ❤️ for the UniVoucher ecosystem 
+Built with ❤️ for the UniVoucher ecosystem | **[Visit UniVoucher.com](https://univoucher.com)** 

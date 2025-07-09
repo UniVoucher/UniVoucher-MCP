@@ -118,6 +118,7 @@ app.use(helmet({
 Public RPCs are unreliable, rate-limited, and unsuitable for production applications.
 
 **Recommended Providers:**
+
 - **Alchemy** (Recommended) - Reliable, well-documented
 - **Infura** - Established provider with good uptime
 - **QuickNode** - High-performance option
@@ -255,6 +256,7 @@ async function redeemCardWithManualGas(provider, cardId, cardSecret, recipientAd
 ```
 
 **Why Let Wallets Handle Gas:**
+
 - Wallets have real-time network awareness
 - Users can adjust gas based on urgency
 - Wallets handle EIP-1559 vs legacy gas pricing automatically
@@ -951,3 +953,4 @@ async function getChainFees(chainId) {
     return null;
   }
 }
+```
