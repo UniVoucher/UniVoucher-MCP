@@ -127,6 +127,19 @@ export class UniVoucherDocumentationProvider {
         description: "UniVoucher API reference documentation",
         mimeType: "text/markdown",
       },
+      {
+        uri: "univoucher://docs/developers/mcp",
+        name: "MCP Integration",
+        description: "Model Context Protocol setup and integration guide",
+        mimeType: "text/markdown",
+      },
+      // Media & Branding
+      {
+        uri: "univoucher://docs/media-kit",
+        name: "Media Kit",
+        description: "UniVoucher branding guidelines and media resources",
+        mimeType: "text/markdown",
+      },
       // Legal Documents
       {
         uri: "univoucher://docs/privacy-policy",
@@ -232,6 +245,8 @@ export class UniVoucherDocumentationProvider {
                 "developers/integration-guide",
                 "developers/security",
                 "developers/api-reference",
+                "developers/mcp",
+                "media-kit",
                 "partner-program"
               ],
             },
@@ -271,6 +286,8 @@ export class UniVoucherDocumentationProvider {
                   "developers/integration-guide",
                   "developers/security",
                   "developers/api-reference",
+                  "developers/mcp",
+                  "media-kit",
                   "partner-program"
                 ],
               },

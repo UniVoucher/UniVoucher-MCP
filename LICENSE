@@ -1,0 +1,43 @@
+Business Source License 1.1
+
+License text copyright (c) 2017 MariaDB Corporation Ab, All Rights Reserved.
+"Business Source License" is a trademark of MariaDB Corporation Ab.
+
+Licensor: UniVoucher (pseudonymous)
+
+Licensed Work: UniVoucher MCP Server - Model Context Protocol integration for UniVoucher.com
+
+Additional Use Grant: You may make use of the Licensed Work solely for the purpose of integrating with or building applications that interact with the official UniVoucher protocol at univoucher.com. You may not use the Licensed Work to create competing gift card protocols or rebrand the service under different names.
+
+Change Date: 2035-05-04
+
+Change License: MIT
+
+The Business Source License (this document, or the "License") is not an Open Source license. However, the Licensed Work will eventually be made available under an Open Source License, as stated in this License.
+
+For license terms, see the Business Source License 1.1 available at:
+https://mariadb.com/bsl11/
+
+## Terms
+
+1. **You may not use the Licensed Work in a production environment for any commercial or revenue-generating purpose**, except as permitted under the Additional Use Grant above.
+
+2. **Additional Use Grant**: The Licensor grants you a limited, non-exclusive, non-transferable, and revocable right to:
+   - Integrate with or build front-end interfaces that interact with official UniVoucher smart contracts
+   - Use this MCP server to access UniVoucher documentation and API
+   - Display UniVoucher documentation while preserving UniVoucher branding
+
+   You may **not**:
+   - Rebrand or repackage this work for competing services
+   - Use this work with non-UniVoucher smart contracts for gift card functionality
+   - Create competing products using this codebase
+
+3. **On the Change Date**, this License will automatically convert to the MIT License.
+
+4. **You must preserve this license notice** in all copies or substantial portions of the Licensed Work.
+
+---
+
+## Notice
+
+This software is provided by UniVoucher and contributors "as is" and any express or implied warranties, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose are disclaimed. 

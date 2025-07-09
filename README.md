@@ -41,7 +41,7 @@ npm install -g univoucher-mcp@latest
 
 #### Specific Version Installation
 ```bash
-npm install univoucher-mcp@1.3.3
+npm install univoucher-mcp@1.3.4
 ```
 
 Then use `univoucher-mcp` directly in your MCP configuration.
@@ -101,7 +101,9 @@ Once configured, you can ask your AI assistant:
 
 ## License
 
-MIT License - see LICENSE file for details
+Business Source License 1.1 - see LICENSE file for details
+
+This project will transition to MIT License on 2035-05-04
 
 ---
 
