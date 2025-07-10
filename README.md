@@ -2,6 +2,7 @@
 
 **Official Model Context Protocol (MCP) server for [UniVoucher.com](https://univoucher.com)** - the world's first decentralized crypto gift card protocol that allows users to create and redeem crypto gift cards across multiple blockchains.
 
+
 ## What is UniVoucher?
 
 UniVoucher is the world's first decentralized tangible crypto gift card protocol that allows users to create and redeem crypto gift cards across multiple blockchains including Ethereum, Polygon, BSC, and more.
@@ -106,5 +107,7 @@ Business Source License 1.1 - see LICENSE file for details
 This project will transition to MIT License on 2035-05-04
 
 ---
+
+[![MCP Badge](https://lobehub.com/badge/mcp/univoucher-univoucher-mcp)](https://lobehub.com/mcp/univoucher-univoucher-mcp)
 
 Built with ❤️ for the UniVoucher ecosystem | **[Visit UniVoucher.com](https://univoucher.com)** 
