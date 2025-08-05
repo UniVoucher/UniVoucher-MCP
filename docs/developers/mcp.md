@@ -65,9 +65,9 @@ For Windsurf, Cline, or other MCP-compatible apps, use the same configuration fo
 - **AI-Powered Development**: AI can access docs and data during coding
 - **Comprehensive Access**: Full UniVoucher ecosystem in one interface
 
-## Example: RedeemNow
+## Example: Redeem Base
 
-[RedeemNow](https://redeemnow.xyz) was built using UniVoucher MCP with Cursor IDE and Claude 4 Sonnet. The MCP enabled:
+[Redeem Base](https://redeembase.com) was built using UniVoucher MCP with Cursor IDE and Claude 4 Sonnet. The MCP enabled:
 
 - Real-time access to UniVoucher documentation during development
 - AI-generated code following UniVoucher best practices

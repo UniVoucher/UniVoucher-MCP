@@ -55,7 +55,7 @@ function redeemCard(
 
 ### Implementation Example
 
-Here's a complete example of redeeming a card with partner fees, based on the RedeemNow implementation:
+Here's a complete example of redeeming a card with partner fees, based on the Redeem Base implementation:
 
 ```javascript
 // Import required libraries
@@ -248,9 +248,9 @@ async function gaslessRedeemWithPartnerFee(cardId, cardSecret, recipientAddress)
 
 ## Partner Examples
 
-### RedeemNow - Gasless Redemption Service
+### Redeem Base - Gasless Redemption Service
 
-**[RedeemNow](https://redeemnow.xyz)** is a prime example of the UniVoucher Partner Program in action. It provides gasless gift card redemption services while earning partner fees.
+**[Redeem Base](https://redeembase.com)** is a prime example of the UniVoucher Partner Program in action. It provides gasless gift card redemption services while earning partner fees.
 
 #### Key Features
 
@@ -268,13 +268,13 @@ async function gaslessRedeemWithPartnerFee(cardId, cardSecret, recipientAddress)
 
 #### Repository & Links
 
-- **Live Demo**: [https://redeemnow.xyz](https://redeemnow.xyz)
-- **Source Code**: [GitHub Repository](https://github.com/UniVoucher/RedeemNow)
+- **Live Demo**: [https://redeembase.com](https://redeembase.com)
+- **Source Code**: [GitHub Repository](https://github.com/UniVoucher/RedeemBase)
 - **License**: Open source - free to clone and customize
 - **Built With**: [Cursor IDE](https://cursor.sh), [Claude 4 Sonnet](https://claude.ai), and [UniVoucher MCP](https://docs.univoucher.com/developers/mcp)
 
-!!! tip "Fork RedeemNow"
-    RedeemNow is completely open source and designed to be easily forked. Clone the repository and deploy your own gasless redemption service in minutes.
+!!! tip "Fork Redeem Base"
+    Redeem Base is completely open source and designed to be easily forked. Clone the repository and deploy your own gasless redemption service in minutes.
 
 
 ## Fee Calculation Examples

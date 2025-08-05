@@ -6,6 +6,18 @@ export class UniVoucherAPIProvider {
   private baseUrl = "https://api.univoucher.com/v1";
   private openApiUrl = "https://api.univoucher.com/openapi.yaml";
   private cachedOpenApiSpec: any = null;
+  private privateKey: string | null = null;
+
+  constructor() {
+    // Get private key from environment variable (standard Ethereum wallet private key)
+    const rawPrivateKey = process.env.WALLET_PRIVATE_KEY || null;
+    if (rawPrivateKey) {
+      // Accept private key with or without 0x prefix
+      this.privateKey = rawPrivateKey.startsWith('0x') ? rawPrivateKey.slice(2) : rawPrivateKey;
+    } else {
+      this.privateKey = null;
+    }
+  }
 
   async listResources(): Promise<Resource[]> {
     return [
@@ -87,6 +99,46 @@ export class UniVoucherAPIProvider {
         },
       },
       {
+        name: "create_gift_card",
+        description: "Create a new UniVoucher gift card using your standard Ethereum crypto wallet private key. The private key is optional and can be set via WALLET_PRIVATE_KEY environment variable (with or without 0x prefix). Uses Direct Response Mode for immediate card details.",
+        inputSchema: {
+          type: "object",
+          properties: {
+            chainId: { 
+              type: "integer", 
+              description: "Chain ID where to create the card (e.g., 1 for Ethereum, 56 for BNB Chain, 137 for Polygon)",
+              required: true
+            },
+            tokenAddress: { 
+              type: "string", 
+              description: "Token address (use 0x0000000000000000000000000000000000000000 for native currency)",
+              required: true
+            },
+            tokenAmount: { 
+              type: "string", 
+              description: "Amount of tokens to store in the card (as string to handle large numbers)",
+              required: true
+            },
+            message: { 
+              type: "string", 
+              description: "Optional message to attach to the card"
+            },
+            quantity: { 
+              type: "integer", 
+              description: "Number of cards to create (1-100)",
+              minimum: 1,
+              maximum: 100,
+              default: 1
+            },
+            orderId: { 
+              type: "string", 
+              description: "Order ID for user reference (auto-generated if not provided)"
+            },
+          },
+          required: ["chainId", "tokenAddress", "tokenAmount"],
+        },
+      },
+      {
         name: "get_current_fees",
         description: "Get current fee percentages for chains",
         inputSchema: {
@@ -136,6 +188,9 @@ export class UniVoucherAPIProvider {
           break;
         case "get_single_card":
           result = await this.getSingleCard(args);
+          break;
+        case "create_gift_card":
+          result = await this.createGiftCard(args);
           break;
         case "get_current_fees":
           result = await this.getCurrentFees(args);
@@ -251,6 +306,69 @@ export class UniVoucherAPIProvider {
     const response = await fetch(url.toString());
     if (!response.ok) {
       throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+    }
+    
+    return await response.json();
+  }
+
+  private async createGiftCard(params: {
+    chainId: number;
+    tokenAddress: string;
+    tokenAmount: string;
+    message?: string;
+    quantity?: number;
+    orderId?: string;
+  }): Promise<any> {
+    // Check if private key is available (optional for card creation)
+    if (!this.privateKey) {
+      throw new Error("Wallet private key not found. Please set the WALLET_PRIVATE_KEY environment variable with your standard Ethereum crypto wallet private key (with or without 0x prefix).");
+    }
+
+    // Validate required parameters
+    if (!params.chainId || !params.tokenAddress || !params.tokenAmount) {
+      throw new Error("Missing required parameters: chainId, tokenAddress, and tokenAmount are required.");
+    }
+
+    // Validate chain ID (common supported chains)
+    const supportedChains = [1, 8453, 56, 137, 42161, 10, 43114]; // Ethereum, Base, BNB Chain, Polygon, Arbitrum, Optimism, Avalanche
+    if (!supportedChains.includes(params.chainId)) {
+      throw new Error(`Unsupported chain ID: ${params.chainId}. Supported chains: ${supportedChains.join(", ")}`);
+    }
+
+    // Validate token address format
+    if (!params.tokenAddress.match(/^0x[a-fA-F0-9]{40}$/)) {
+      throw new Error("Invalid token address format. Must be a valid Ethereum address.");
+    }
+
+    // Validate token amount (should be a positive number string)
+    if (!params.tokenAmount || isNaN(Number(params.tokenAmount)) || Number(params.tokenAmount) <= 0) {
+      throw new Error("Invalid token amount. Must be a positive number.");
+    }
+
+    // Generate order ID if not provided
+    const orderId = params.orderId || `mcp_order_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    
+    const requestBody = {
+      privateKey: this.privateKey,
+      network: params.chainId, // API expects 'network' not 'chainId'
+      tokenAddress: params.tokenAddress,
+      amount: params.tokenAmount, // API expects 'amount' not 'tokenAmount'
+      quantity: params.quantity || 1,
+      orderId: orderId,
+      ...(params.message && { message: params.message }),
+    };
+
+    const response = await fetch(`${this.baseUrl}/cards/create`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Card creation failed: ${response.status} ${response.statusText} - ${errorText}`);
     }
     
     return await response.json();

@@ -165,6 +165,12 @@ export class UniVoucherDocumentationProvider {
         description: "UniVoucher Partner Program - earn 1% fees on redemptions",
         mimeType: "text/markdown",
       },
+      {
+        uri: "univoucher://docs/univoucher-for-woocommerce",
+        name: "UniVoucher For WooCommerce Plugin",
+        description: "Complete guide for integrating UniVoucher with WooCommerce stores",
+        mimeType: "text/markdown",
+      },
     ];
   }
 
@@ -247,7 +253,8 @@ export class UniVoucherDocumentationProvider {
                 "developers/api-reference",
                 "developers/mcp",
                 "media-kit",
-                "partner-program"
+                "partner-program",
+                "univoucher-for-woocommerce"
               ],
             },
           },
@@ -288,7 +295,8 @@ export class UniVoucherDocumentationProvider {
                   "developers/api-reference",
                   "developers/mcp",
                   "media-kit",
-                  "partner-program"
+                  "partner-program",
+                  "univoucher-for-woocommerce"
                 ],
               },
               description: "Array of documentation pages to retrieve",

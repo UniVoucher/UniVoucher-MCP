@@ -14,7 +14,7 @@ import { UniVoucherDocumentationProvider } from "./providers/documentation.js";
 import { UniVoucherAPIProvider } from "./providers/api.js";
 
 const SERVER_NAME = "univoucher-mcp";
-const SERVER_VERSION = "1.4.0";
+const SERVER_VERSION = "1.5.0";
 
 class UniVoucherMCPServer {
   private server: Server;
@@ -82,7 +82,7 @@ class UniVoucherMCPServer {
       
       if (name.startsWith("list_doc_pages") || name.startsWith("get_doc_page") || name.startsWith("get_multiple_doc_pages")) {
         return await this.docProvider.callTool(name, args);
-      } else if (name.startsWith("query_api") || name.startsWith("get_")) {
+      } else if (name.startsWith("query_api") || name.startsWith("get_") || name.startsWith("create_")) {
         return await this.apiProvider.callTool(name, args);
       }
       
