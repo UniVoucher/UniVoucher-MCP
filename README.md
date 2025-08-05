@@ -15,6 +15,7 @@ UniVoucher is the world's first decentralized tangible crypto gift card protocol
 
 Add this to your MCP configuration file (`mcp.json` or equivalent):
 
+#### Basic Configuration (Read-only access)
 ```json
 {
   "mcpServers": {
@@ -26,6 +27,25 @@ Add this to your MCP configuration file (`mcp.json` or equivalent):
   }
 }
 ```
+
+#### With Wallet Private Key (Full access including card creation)
+```json
+{
+  "mcpServers": {
+    "univoucher": {
+      "command": "npx",
+      "args": ["-y", "univoucher-mcp@latest"],
+      "env": {
+        "WALLET_PRIVATE_KEY": "your_ethereum_wallet_private_key_here"
+      }
+    }
+  }
+}
+```
+
+**⚠️ Security Note**: Never commit your wallet private key to version control. Use environment variables or secure configuration management.
+
+**📝 Note**: The private key is optional. You can provide your standard Ethereum crypto wallet private key with or without the 0x prefix.
 
 ### Supported MCP Clients
 
@@ -70,9 +90,30 @@ Then use `univoucher-mcp` directly in your MCP configuration.
 | `get_multiple_doc_pages` | Get complete content of multiple documentation pages at once |
 | `query_api_cards` | Query gift cards from the protocol |
 | `get_single_card` | Get details of a specific card |
+| `create_gift_card` | Create a new gift card (requires private key) |
 | `get_current_fees` | Get current protocol fees |
 | `get_chains` | Get supported blockchain networks |
 | `get_fee_history` | Get historical fee data |
+
+## Card Creation Feature
+
+### Prerequisites
+- **Wallet Private Key**: Your standard Ethereum crypto wallet private key (with or without 0x prefix, optional)
+- **Supported Networks**: Ethereum (1), Base (8453), BNB Chain (56), Polygon (137), Arbitrum (42161), Optimism (10), Avalanche (43114)
+- **Token Support**: Any ERC-20 token or native currency
+
+### Security
+- Wallet private keys are only used locally and never stored
+- Keys are passed via environment variables for security
+- All transactions are signed locally and sent to UniVoucher API
+- Private key is optional - you can use the MCP server for read-only operations without providing a private key
+- Uses Direct Response Mode for immediate card details without callbacks
+
+### Supported Tokens
+- **Native Currency**: Use `0x0000000000000000000000000000000000000000` as token address
+- **ERC-20 Tokens**: Use the token's contract address
+- **Amount Format**: Use string format for large numbers (e.g., "1000000000000000000" for 1 ETH)
+- **Bulk Creation**: Create up to 100 cards in a single transaction
 
 ## Example Usage
 
@@ -85,6 +126,9 @@ Once configured, you can ask your AI assistant:
 - "Show me the technical documentation on how UniVoucher works"
 - "Get the API reference and security documentation"
 - "How many cards are in the UniVoucher protocol?"
+- "Create a new gift card on Ethereum with 0.1 ETH"
+- "Create a gift card on Polygon with 100 USDC"
+- "Create 5 gift cards on Base with 50 USDC each"
 
 ## Links
 
